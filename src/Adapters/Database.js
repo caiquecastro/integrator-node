@@ -1,7 +1,18 @@
 const knex = require('knex');
 
 function parseConfig(config) {
-  return config;
+  let parsedConfig = config;
+
+  const databaseClient = config.client || config.dialect;
+
+  if (databaseClient === 'sqlite') {
+    parsedConfig = {
+      ...parsedConfig,
+      useNullAsDefault: true,
+    };
+  }
+
+  return parsedConfig;
 }
 
 class Database {
@@ -12,7 +23,9 @@ class Database {
   }
 
   fetch() {
-    return this.connection.select().from(this.config.table);
+    const { columns } = this.config;
+
+    return this.connection.select(columns).from(this.config.table);
   }
 
   write(rows = []) {

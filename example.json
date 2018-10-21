@@ -6,7 +6,10 @@
             "connection": {
                 "filename": "./source.sqlite"
             },
-            "table": "Users"
+            "table": "users",
+            "columns": [
+
+            ]
         }
     },
     "destination": {
@@ -16,7 +19,7 @@
             "connection": {
                 "filename": "./destination.sqlite"
             },
-            "table": "Users"
+            "table": "users"
         }
     }
 }
