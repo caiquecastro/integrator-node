@@ -1,5 +1,6 @@
 const test = require('ava');
 const CsvAdapter = require('../src/Adapters/Csv');
+const HttpAdapter = require('../src/Adapters/Http');
 const AdapterFactory = require('../src/AdapterFactory');
 const DatabaseAdapter = require('../src/Adapters/Database');
 
@@ -23,4 +24,12 @@ test('It creates csv adapter', async (t) => {
   });
 
   t.true(adapter instanceof CsvAdapter);
+});
+
+test('It creates http adapter', async (t) => {
+  const adapter = AdapterFactory({
+    type: 'http',
+  });
+
+  t.true(adapter instanceof HttpAdapter);
 });
