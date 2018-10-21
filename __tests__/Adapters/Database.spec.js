@@ -2,7 +2,7 @@ const Database = require('../../src/Adapters/Database');
 
 test('It fetches the records', async () => {
     const databaseAdapter = new Database({
-        driver: 'sqlite',
+        dialect: 'sqlite',
         connection: ':memory:',
         table: 'Users',
     });

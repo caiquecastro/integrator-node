@@ -1,0 +1,22 @@
+{
+    "source": {
+        "type": "database",
+        "options": {
+            "dialect": "sqlite",
+            "connection": {
+                "fileName": "./source.sqlite"
+            },
+            "table": "Users"
+        }
+    },
+    "destination": {
+        "type": "database",
+        "options": {
+            "dialect": "sqlite",
+            "connection": {
+                "fileName": "./source.sqlite"
+            },
+            "table": "Users"
+        }
+    }
+}

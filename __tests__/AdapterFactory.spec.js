@@ -4,8 +4,10 @@ const DatabaseAdapter = require('../src/Adapters/Database');
 test('It creates database adapter', async () => {
     const databaseAdapter = AdapterFactory({
         type: 'database',
-        connection: {
-            client: 'sqlite',
+        options: {
+            connection: {
+                client: 'sqlite',
+            },
         },
     });
 

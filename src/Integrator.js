@@ -22,9 +22,10 @@ class Integrator {
         this.destination = AdapterFactory(this.config.destination);
     }
 
-    run() {
+    async run() {
+        const result = await this.source.fetch();
 
-        return Promise.resolve();
+        return this.destination.write(result);
     }
 }
 
