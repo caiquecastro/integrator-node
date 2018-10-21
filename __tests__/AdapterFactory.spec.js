@@ -29,6 +29,9 @@ test('It creates csv adapter', async (t) => {
 test('It creates http adapter', async (t) => {
   const adapter = AdapterFactory({
     type: 'http',
+    options: {
+      url: 'http://api.com/users',
+    },
   });
 
   t.true(adapter instanceof HttpAdapter);
