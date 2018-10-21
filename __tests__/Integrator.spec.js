@@ -1,17 +1,18 @@
+const test = require('ava');
 const Integrator = require('../src/Integrator');
 
-test('It requires source and destination', async () => {
+test('It requires source and destination', async (t) => {
   try {
     const integrator = new Integrator();
     await integrator.run();
 
-    throw new Error('Should not be thrown');
+    t.fail();
   } catch (err) {
-    expect(err.message).toBe('It is required to provide source and destination config');
+    t.is(err.message, 'It is required to provide source and destination config');
   }
 });
 
-test('It requires source and destination types', async () => {
+test('It requires source and destination types', async (t) => {
   try {
     const integrator = new Integrator({
       source: {},
@@ -19,13 +20,13 @@ test('It requires source and destination types', async () => {
     });
     await integrator.run();
 
-    throw new Error('Should not be thrown');
+    t.fail();
   } catch (err) {
-    expect(err.message).toBe('It is required to provide source and destination types');
+    t.is(err.message, 'It is required to provide source and destination types');
   }
 });
 
-test('It requires valid type for source and destination', async () => {
+test('It requires valid type for source and destination', async (t) => {
   try {
     const integrator = new Integrator({
       source: {
@@ -35,9 +36,10 @@ test('It requires valid type for source and destination', async () => {
         type: 'invalid',
       },
     });
+    await integrator.run();
 
-    throw new Error('Should not be thrown');
+    t.fail();
   } catch (err) {
-    expect(err.message).toBe('Invalid type: invalid');
+    t.is(err.message, 'Invalid type: invalid');
   }
 });
