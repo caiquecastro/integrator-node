@@ -2,7 +2,21 @@
 
 ## Version 0.3.0 - TBA
 
-- TBD
+### Features
+- Allow specify columns to fetch from source
+
+### Fixes
+- Remove useNullAsDefault warnings from console
+
+## Version 0.2.2 - 2018-10-21
+
+### Fixes
+- Add node shebang and add permission to run `cli.js`
+
+## Version 0.2.1 - 2018-10-21
+
+### Fixes
+- Add bin entry on package.json
 
 ## Version 0.2.0 - 2018-10-21
 

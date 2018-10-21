@@ -1,6 +1,6 @@
 {
   "name": "integrator-node",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "A integration tool between systems, platforms and protocols",
   "homepage": "https://github.com/caiquecastro/integrator-node",
   "main": "index.js",

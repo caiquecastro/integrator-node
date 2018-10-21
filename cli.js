@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 const argv = require('./argv');
 const Integrator = require('./src/Integrator');
 const SettingsParser = require('./src/SettingsParser');
