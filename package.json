@@ -1,14 +1,15 @@
 {
   "name": "integrator-node",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A integration tool between systems, platforms and protocols",
   "homepage": "https://github.com/caiquecastro/integrator-node",
   "main": "index.js",
+  "bin": "cli.js",
   "scripts": {
     "test": "ava",
     "lint": "eslint ."
   },
-  "keywords": [],
+  "keywords": ["integration", "tool"],
   "author": "",
   "license": "MIT",
   "devDependencies": {
