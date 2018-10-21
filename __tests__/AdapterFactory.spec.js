@@ -1,14 +1,26 @@
 const test = require('ava');
+const CsvAdapter = require('../src/Adapters/Csv');
 const AdapterFactory = require('../src/AdapterFactory');
 const DatabaseAdapter = require('../src/Adapters/Database');
 
 test('It creates database adapter', async (t) => {
-  const databaseAdapter = AdapterFactory({
+  const adapter = AdapterFactory({
     type: 'database',
     options: {
       client: 'sqlite',
     },
   });
 
-  t.true(databaseAdapter instanceof DatabaseAdapter);
+  t.true(adapter instanceof DatabaseAdapter);
+});
+
+test('It creates csv adapter', async (t) => {
+  const adapter = AdapterFactory({
+    type: 'csv',
+    options: {
+      //
+    },
+  });
+
+  t.true(adapter instanceof CsvAdapter);
 });

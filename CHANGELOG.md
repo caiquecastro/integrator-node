@@ -1,9 +1,10 @@
 # CHANGELOG
 
-## Version 0.3.0 - TBA
+## Version 0.3.0 - 2018-10-21
 
 ### Features
 - Allow specify columns to fetch from source
+- Csv Adapter
 
 ### Fixes
 - Remove useNullAsDefault warnings from console
