@@ -1,19 +1,23 @@
 const knex = require('knex');
 
-function parseConfig (config) {
-    return config;
+function parseConfig(config) {
+  return config;
 }
 
 class Database {
-    constructor(config = {}) {
-        this.config = parseConfig(config);
+  constructor(config = {}) {
+    this.config = parseConfig(config);
 
-        this.connection = knex(this.config.connection);
-    }
+    this.connection = knex(this.config);
+  }
 
-    fetch () {
-        return this.connection.select().from(this.config.table);
-    }
+  fetch() {
+    return this.connection.select().from(this.config.table);
+  }
+
+  write(rows = []) {
+    return this.connection.batchInsert(this.config.table, rows);
+  }
 }
 
 module.exports = Database;

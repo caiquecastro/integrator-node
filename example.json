@@ -4,7 +4,7 @@
         "options": {
             "dialect": "sqlite",
             "connection": {
-                "fileName": "./source.sqlite"
+                "filename": "./source.sqlite"
             },
             "table": "Users"
         }
@@ -14,7 +14,7 @@
         "options": {
             "dialect": "sqlite",
             "connection": {
-                "fileName": "./source.sqlite"
+                "filename": "./destination.sqlite"
             },
             "table": "Users"
         }

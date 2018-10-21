@@ -1,23 +1,49 @@
 const Database = require('../../src/Adapters/Database');
 
 test('It fetches the records', async () => {
-    const databaseAdapter = new Database({
-        dialect: 'sqlite',
-        connection: ':memory:',
-        table: 'Users',
-    });
+  const databaseAdapter = new Database({
+    dialect: 'sqlite',
+    connection: ':memory:',
+    table: 'Users',
+  });
 
-    await databaseAdapter.connection.schema.createTable('Users', (t) => {
-        t.string('name');
-    });
+  await databaseAdapter.connection.schema.createTable('Users', (t) => {
+    t.string('name');
+  });
 
-    await databaseAdapter.connection.insert({ name: 'John' }).into('Users');
+  await databaseAdapter.connection.insert({ name: 'John' }).into('Users');
 
-    const result = await databaseAdapter.fetch();
+  const result = await databaseAdapter.fetch();
 
-    expect(result).toEqual([
-        {
-            name: 'John',
-        }
-    ]);
+  expect(result).toEqual([
+    {
+      name: 'John',
+    },
+  ]);
+});
+
+test('It writes the records', async () => {
+  const databaseAdapter = new Database({
+    dialect: 'sqlite',
+    connection: ':memory:',
+    table: 'Users',
+  });
+
+  await databaseAdapter.connection.schema.createTable('Users', (t) => {
+    t.string('name');
+  });
+
+  await databaseAdapter.write([
+    {
+      name: 'John',
+    },
+  ]);
+
+  const results = await databaseAdapter.connection.select().from('Users');
+
+  expect(results).toEqual([
+    {
+      name: 'John',
+    },
+  ]);
 });
