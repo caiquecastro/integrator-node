@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Version 0.4.0 - TBA
+
+- TBD
+
 ## Version 0.3.0 - 2018-10-21
 
 ### Features
