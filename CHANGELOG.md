@@ -1,8 +1,14 @@
 # CHANGELOG
 
-## Version 0.4.0 - TBA
+## Version 0.4.0 - 2018-10-21
 
-- TBD
+### Features
+- Http Adapter
+
+### Fixes
+- Validate config for Csv Adapter
+- Validate config for Http Adapter
+- Validate config for Database Adapter
 
 ## Version 0.3.0 - 2018-10-21
 

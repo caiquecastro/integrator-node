@@ -17,6 +17,5 @@ WIP
 
 ## Roadmap
 
-- REST Adapter
 - Report integration timing in the end.
 - Support to manifest file in YAML and Javascript.
