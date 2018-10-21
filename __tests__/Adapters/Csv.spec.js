@@ -37,7 +37,7 @@ test('It fetches specified columns for the records', async (t) => {
 
 test('It writes the records', async (t) => {
   const adapter = new Csv({
-    path: path.resolve('./__tests__/tmp/users.csv'),
+    path: path.resolve('./__tests__/fixtures/users_tmp.csv'),
   });
 
   await adapter.write([
@@ -47,7 +47,7 @@ test('It writes the records', async (t) => {
     },
   ]);
 
-  const result = fs.readFileSync(path.resolve('./__tests__/tmp/users.csv'), 'utf-8');
+  const result = fs.readFileSync(path.resolve('./__tests__/fixtures/users_tmp.csv'), 'utf-8');
 
   t.deepEqual(result, 'name;email\nJohn;johndoe@example.com\n');
 });
