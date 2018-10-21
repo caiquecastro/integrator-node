@@ -1,0 +1,18 @@
+{
+    "source": {
+        "type": "csv",
+        "options": {
+            "path": "./__tests__/fixtures/users.csv"
+        }
+    },
+    "destination": {
+        "type": "database",
+        "options": {
+            "dialect": "sqlite",
+            "connection": {
+                "filename": "./destination.sqlite"
+            },
+            "table": "users"
+        }
+    }
+}
