@@ -1,9 +1,17 @@
 const knex = require('knex');
 
+const validDatabaseClients = [
+  'sqlite',
+];
+
 function parseConfig(config) {
   let parsedConfig = config;
 
   const databaseClient = config.client || config.dialect;
+
+  if (!validDatabaseClients.includes(databaseClient)) {
+    throw new Error('Invalid database client/dialect');
+  }
 
   if (databaseClient === 'sqlite') {
     parsedConfig = {

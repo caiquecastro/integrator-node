@@ -1,6 +1,20 @@
 const test = require('ava');
 const Database = require('../../src/Adapters/Database');
 
+test('It validates the database dialect', async (t) => {
+  try {
+    const adapter = new Database({
+      dialect: 'invalid',
+    });
+
+    await adapter.fetch();
+
+    t.fail();
+  } catch (err) {
+    t.is(err.message, 'Invalid database client/dialect');
+  }
+});
+
 test('It fetches the records', async (t) => {
   const databaseAdapter = new Database({
     dialect: 'sqlite',

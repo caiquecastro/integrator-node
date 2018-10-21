@@ -18,7 +18,7 @@ test('It creates csv adapter', async (t) => {
   const adapter = AdapterFactory({
     type: 'csv',
     options: {
-      //
+      path: 'my-fake-file',
     },
   });
 

@@ -1,9 +1,17 @@
 const fs = require('fs');
 const csv = require('csv');
 
+function parseConfig(config) {
+  if (!config.path) {
+    throw new Error('It\'s required to provide a file for the csv file');
+  }
+
+  return config;
+}
+
 class Csv {
   constructor(config) {
-    this.config = config;
+    this.config = parseConfig(config);
   }
 
   fetch() {

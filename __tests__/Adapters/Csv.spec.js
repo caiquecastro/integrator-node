@@ -5,7 +5,19 @@ const path = require('path');
 const Csv = require('../../src/Adapters/Csv');
 
 test.before(() => fs.mkdirSync('./__tests__/fixtures/tmp'));
-test.afterEach(() => del('./__tests__/fixtures/tmp/*'));
+test.afterEach(() => del('./__tests__/fixtures/tmp'));
+
+test('Requires path for Csv Adapter', async (t) => {
+  try {
+    const adapter = new Csv({
+      //
+    });
+
+    await adapter.fetch();
+  } catch (err) {
+    t.is(err.message, 'It\'s required to provide a file for the csv file');
+  }
+});
 
 test('It fetches the records', async (t) => {
   const adapter = new Csv({
