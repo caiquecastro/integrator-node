@@ -8,6 +8,9 @@ jobs:
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
       - image: mcr.microsoft.com/mssql/server
+        environment:
+          ACCEPT_EULA: Y
+          SA_PASSWORD: integrator!23
 
     working_directory: ~/repo
 
