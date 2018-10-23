@@ -15,6 +15,37 @@ test('It validates the database dialect', async (t) => {
   }
 });
 
+test('It fetches from sql server database', async (t) => {
+  const adapter = new Database({
+    dialect: 'mssql',
+    connection: {
+      host: 'localhost',
+      user: 'sa',
+      password: 'integrator!23',
+      options: {
+        encrypt: false,
+      },
+    },
+    table: 'Users',
+  });
+
+  await adapter.connection.schema.hasTable('Users')
+    .then((exists) => {
+      if (exists) {
+        return Promise.resolve();
+      }
+
+      return adapter.connection.schema.createTable('Users', (table) => {
+        table.increments('id');
+        table.string('name');
+      });
+    });
+
+  await adapter.fetch();
+
+  t.pass();
+});
+
 test('It fetches the records', async (t) => {
   const databaseAdapter = new Database({
     dialect: 'sqlite',

@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## Version 0.5.0 - 2018-10-22
+
+### Features
+- MSSQL Driver for Database Adapter
+
 ## Version 0.4.0 - 2018-10-21
 
 ### Features
