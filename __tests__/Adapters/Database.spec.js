@@ -46,6 +46,35 @@ test('It fetches from sql server database', async (t) => {
   t.pass();
 });
 
+test('It fetches from mysql database', async (t) => {
+  const adapter = new Database({
+    dialect: 'mysql',
+    connection: {
+      host: 'localhost',
+      user: 'integrator',
+      password: 'integrator!23',
+      database: 'Integrator',
+    },
+    table: 'Users',
+  });
+
+  await adapter.connection.schema.hasTable('Users')
+    .then((exists) => {
+      if (exists) {
+        return Promise.resolve();
+      }
+
+      return adapter.connection.schema.createTable('Users', (table) => {
+        table.increments('id');
+        table.string('name');
+      });
+    });
+
+  await adapter.fetch();
+
+  t.pass();
+});
+
 test('It fetches the records', async (t) => {
   const databaseAdapter = new Database({
     dialect: 'sqlite',

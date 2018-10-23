@@ -3,6 +3,7 @@ const knex = require('knex');
 const validDatabaseClients = [
   'sqlite',
   'mssql',
+  'mysql',
 ];
 
 function parseConfig(config) {
