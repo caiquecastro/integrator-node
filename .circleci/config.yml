@@ -4,13 +4,16 @@ jobs:
     docker:
       - image: node:10
 
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
       - image: mcr.microsoft.com/mssql/server
         environment:
           ACCEPT_EULA: Y
           SA_PASSWORD: integrator!23
+      - image: mysql
+        environment:
+          MYSQL_RANDOM_ROOT_PASSWORD: yes
+          MYSQL_USER: integrator
+          MYSQL_PASSWORD: integrator!23
+          MYSQL_DATABASE: Integrator
 
     working_directory: ~/repo
 
