@@ -1,6 +1,6 @@
 # Integrator Node
 
-[![Build Status](https://travis-ci.org/caiquecastro/integrator-node.svg?branch=master)](https://travis-ci.org/caiquecastro/integrator-node)
+[![CircleCI](https://circleci.com/gh/caiquecastro/integrator-node.svg?style=svg)](https://circleci.com/gh/caiquecastro/integrator-node)
 
 A integration tool between systems, platforms and protocols
 
@@ -17,5 +17,6 @@ WIP
 
 ## Roadmap
 
+- Deploy to NPM on CI
 - Report integration timing in the end.
 - Support to manifest file in YAML and Javascript.

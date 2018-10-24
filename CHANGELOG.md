@@ -1,9 +1,13 @@
 # CHANGELOG
 
-## Version 0.5.0 - 2018-10-22
+## Version 0.5.0 - 2018-10-23
 
 ### Features
 - MSSQL Driver for Database Adapter
+- MySQL Driver for Database Adapter
+
+### Chore
+- Replace Travis by CircleCI
 
 ## Version 0.4.0 - 2018-10-21
 
