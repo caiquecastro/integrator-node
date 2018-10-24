@@ -2,6 +2,10 @@ const fs = require('fs');
 const csv = require('csv');
 
 function parseConfig(config) {
+  if (!config) {
+    throw new Error('It\'s required to provide options for the integration');
+  }
+
   if (!config.path) {
     throw new Error('It\'s required to provide a file for the csv file');
   }

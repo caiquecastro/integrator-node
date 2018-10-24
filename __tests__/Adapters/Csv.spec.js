@@ -7,7 +7,17 @@ const Csv = require('../../src/Adapters/Csv');
 test.before(() => fs.mkdirSync('./__tests__/fixtures/tmp'));
 test.afterEach(() => del('./__tests__/fixtures/tmp'));
 
-test('Requires path for Csv Adapter', async (t) => {
+test('Requires argument for Csv Adapter', async (t) => {
+  try {
+    const adapter = new Csv();
+
+    await adapter.fetch();
+  } catch (err) {
+    t.is(err.message, 'It\'s required to provide options for the integration');
+  }
+});
+
+test('Requires path on options for Csv Adapter', async (t) => {
   try {
     const adapter = new Csv({
       //
