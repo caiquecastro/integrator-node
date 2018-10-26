@@ -46,17 +46,7 @@ test('It fetches from sql server database', async (t) => {
     table: 'Users',
   });
 
-  await adapter.connection.schema.hasTable('Users')
-    .then((exists) => {
-      if (exists) {
-        return Promise.resolve();
-      }
-
-      return adapter.connection.schema.createTable('Users', (table) => {
-        table.increments('id');
-        table.string('name');
-      });
-    });
+  await createDummyTable(adapter.connection);
 
   await adapter.fetch();
 
@@ -75,17 +65,7 @@ test('It fetches from mysql database', async (t) => {
     table: 'Users',
   });
 
-  await adapter.connection.schema.hasTable('Users')
-    .then((exists) => {
-      if (exists) {
-        return Promise.resolve();
-      }
-
-      return adapter.connection.schema.createTable('Users', (table) => {
-        table.increments('id');
-        table.string('name');
-      });
-    });
+  await createDummyTable(adapter.connection);
 
   await adapter.fetch();
 
