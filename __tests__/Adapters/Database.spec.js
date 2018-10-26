@@ -32,7 +32,7 @@ test('It validates the database dialect', async (t) => {
   }
 });
 
-test('It fetches from sql server database', async (t) => {
+test.serial('It fetches from sql server database', async (t) => {
   const adapter = new Database({
     dialect: 'mssql',
     connection: {
@@ -56,6 +56,25 @@ test('It fetches from sql server database', async (t) => {
 test('It fetches from mysql database', async (t) => {
   const adapter = new Database({
     dialect: 'mysql',
+    connection: {
+      host: 'localhost',
+      user: 'integrator',
+      password: 'integrator!23',
+      database: 'Integrator',
+    },
+    table: 'Users',
+  });
+
+  await createDummyTable(adapter.connection);
+
+  await adapter.fetch();
+
+  t.pass();
+});
+
+test('It fetches from postgres database', async (t) => {
+  const adapter = new Database({
+    dialect: 'pg',
     connection: {
       host: 'localhost',
       user: 'integrator',
@@ -149,7 +168,7 @@ test('It writes the records', async (t) => {
   ]);
 });
 
-test('It writes in chunks on sql server database', async (t) => {
+test.serial('It writes in chunks on sql server database', async (t) => {
   const adapter = new Database({
     dialect: 'mssql',
     connection: {
