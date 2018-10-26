@@ -18,10 +18,6 @@ function createDummyTable(connection) {
     });
 }
 
-function dropDummyTable(connection) {
-  return connection.schema.dropTable('Users');
-}
-
 test('It validates the database dialect', async (t) => {
   try {
     const adapter = new Database({
@@ -36,7 +32,7 @@ test('It validates the database dialect', async (t) => {
   }
 });
 
-test('It fetches from sql server database', async (t) => {
+test.serial('It fetches from sql server database', async (t) => {
   const adapter = new Database({
     dialect: 'mssql',
     connection: {
@@ -53,8 +49,6 @@ test('It fetches from sql server database', async (t) => {
   await createDummyTable(adapter.connection);
 
   await adapter.fetch();
-
-  await dropDummyTable(adapter.connection);
 
   t.pass();
 });
@@ -174,7 +168,7 @@ test('It writes the records', async (t) => {
   ]);
 });
 
-test('It writes in chunks on sql server database', async (t) => {
+test.serial('It writes in chunks on sql server database', async (t) => {
   const adapter = new Database({
     dialect: 'mssql',
     connection: {
@@ -191,8 +185,6 @@ test('It writes in chunks on sql server database', async (t) => {
   await createDummyTable(adapter.connection);
 
   await adapter.write(manyRows);
-
-  await dropDummyTable(adapter.connection);
 
   t.pass();
 });
