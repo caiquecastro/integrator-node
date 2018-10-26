@@ -4,6 +4,7 @@ const validDatabaseClients = [
   'sqlite',
   'mssql',
   'mysql',
+  'pg',
 ];
 
 function parseConfig(config) {

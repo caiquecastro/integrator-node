@@ -18,3 +18,10 @@ services:
       - MYSQL_DATABASE=Integrator
     ports:
       - 3306:3306
+  pg:
+    image: postgres
+    environment:
+      - POSTGRES_USER=integrator
+      - POSTGRES_DB=Integrator
+    ports:
+      - 5432:5432

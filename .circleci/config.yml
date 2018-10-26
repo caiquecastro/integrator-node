@@ -14,6 +14,10 @@ jobs:
           MYSQL_USER: integrator
           MYSQL_PASSWORD: integrator!23
           MYSQL_DATABASE: Integrator
+      - image: postgres
+        environment:
+          POSTGRES_USER: integrator
+          POSTGRES_DB: Integrator
 
     working_directory: ~/repo
 

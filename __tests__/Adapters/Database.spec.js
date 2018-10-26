@@ -72,6 +72,25 @@ test('It fetches from mysql database', async (t) => {
   t.pass();
 });
 
+test('It fetches from postgres database', async (t) => {
+  const adapter = new Database({
+    dialect: 'pg',
+    connection: {
+      host: 'localhost',
+      user: 'integrator',
+      password: 'integrator!23',
+      database: 'Integrator',
+    },
+    table: 'Users',
+  });
+
+  await createDummyTable(adapter.connection);
+
+  await adapter.fetch();
+
+  t.pass();
+});
+
 test('It fetches the records', async (t) => {
   const databaseAdapter = new Database({
     dialect: 'sqlite',
