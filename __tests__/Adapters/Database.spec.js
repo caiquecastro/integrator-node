@@ -18,6 +18,10 @@ function createDummyTable(connection) {
     });
 }
 
+function dropDummyTable(connection) {
+  return connection.schema.dropTable('Users');
+}
+
 test('It validates the database dialect', async (t) => {
   try {
     const adapter = new Database({
@@ -49,6 +53,8 @@ test('It fetches from sql server database', async (t) => {
   await createDummyTable(adapter.connection);
 
   await adapter.fetch();
+
+  await dropDummyTable(adapter.connection);
 
   t.pass();
 });
@@ -185,6 +191,8 @@ test('It writes in chunks on sql server database', async (t) => {
   await createDummyTable(adapter.connection);
 
   await adapter.write(manyRows);
+
+  await dropDummyTable(adapter.connection);
 
   t.pass();
 });
