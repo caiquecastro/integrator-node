@@ -1,8 +1,11 @@
 {
   "name": "integrator-node",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "A integration tool between systems, platforms and protocols",
   "homepage": "https://github.com/caiquecastro/integrator-node",
+  "repository": {
+    "url": "https://github.com/caiquecastro/integrator-node"
+  },
   "main": "index.js",
   "bin": "cli.js",
   "scripts": {

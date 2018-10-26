@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Version 0.5.1 - 2018-10-25
+
+### Fixes
+- Validate missing options for csv integration
+- Insert batch into database by chunks to prevent query limit
+
 ## Version 0.5.0 - 2018-10-23
 
 ### Features
