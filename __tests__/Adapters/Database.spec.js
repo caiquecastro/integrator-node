@@ -1,5 +1,22 @@
 const test = require('ava');
+const manyRows = require('../fixtures/manyRows');
 const Database = require('../../src/Adapters/Database');
+
+function createDummyTable(connection) {
+  return connection.schema.hasTable('Users')
+    .then((exists) => {
+      if (exists) {
+        return Promise.resolve();
+      }
+
+      return connection.schema.createTable('Users', (table) => {
+        table.increments('id');
+        table.string('name');
+        table.string('role');
+        table.integer('age');
+      });
+    });
+}
 
 test('It validates the database dialect', async (t) => {
   try {
@@ -150,4 +167,25 @@ test('It writes the records', async (t) => {
       name: 'John',
     },
   ]);
+});
+
+test('It writes in chunks on sql server database', async (t) => {
+  const adapter = new Database({
+    dialect: 'mssql',
+    connection: {
+      host: 'localhost',
+      user: 'sa',
+      password: 'integrator!23',
+      options: {
+        encrypt: false,
+      },
+    },
+    table: 'Users',
+  });
+
+  await createDummyTable(adapter.connection);
+
+  await adapter.write(manyRows);
+
+  t.pass();
 });
