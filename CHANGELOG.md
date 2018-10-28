@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## Version 0.6.0 - TBA
+
+### Features
+- Postgres Driver for Database Adapter
+
 ## Version 0.5.1 - 2018-10-25
 
 ### Fixes
