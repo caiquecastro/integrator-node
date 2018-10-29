@@ -1,6 +1,7 @@
 # Integrator Node
 
 [![CircleCI](https://circleci.com/gh/caiquecastro/integrator-node.svg?style=svg)](https://circleci.com/gh/caiquecastro/integrator-node)
+[![npm](https://img.shields.io/npm/v/integrator-node.svg)](https://www.npmjs.com/package/integrator-node)
 
 A integration tool between systems, platforms and protocols
 
