@@ -9,7 +9,7 @@
   "main": "index.js",
   "bin": "cli.js",
   "scripts": {
-    "test": "ava",
+    "test": "nyc ava",
     "lint": "eslint ."
   },
   "keywords": [
@@ -24,7 +24,8 @@
     "eslint": "^5.8.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
-    "nock": "^10.0.1"
+    "nock": "^10.0.1",
+    "nyc": "^13.1.0"
   },
   "dependencies": {
     "csv": "^4.0.0",
