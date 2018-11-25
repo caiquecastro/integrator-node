@@ -6,11 +6,16 @@ function parseConfig(config) {
     throw new Error('It\'s required to provide options for the integration');
   }
 
-  if (!config.path) {
+  const ioType = config.ioType || 'file';
+
+  if (ioType === 'file' && !config.path) {
     throw new Error('It\'s required to provide a file for the csv file');
   }
 
-  return config;
+  return {
+    ...config,
+    ioType,
+  };
 }
 
 class Csv {
@@ -50,6 +55,12 @@ class Csv {
     });
   }
 
+  writeOutput(output) {
+    if (this.config.ioType === 'file') {
+      fs.writeFileSync(this.config.path, output);
+    }
+  }
+
   write(rows) {
     const stringifyConfig = {
       header: true,
@@ -61,9 +72,9 @@ class Csv {
         if (err) {
           reject(err);
         } else {
-          fs.writeFileSync(this.config.path, output);
+          this.writeOutput(output);
 
-          resolve();
+          resolve(output);
         }
       });
     });
