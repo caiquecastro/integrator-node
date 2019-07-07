@@ -1,9 +1,12 @@
 # CHANGELOG
 
-## Version 0.6.0 - TBA
+## Version 0.6.0 - 2019-07-07
 
 ### Features
 - Postgres Driver for Database Adapter
+
+## Fixes
+- Remove potencial security vulnerabilities by updating the dependencies
 
 ## Version 0.5.1 - 2018-10-25
 
