@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Version 0.7.0 - TBD
+
+## Breaking Changes
+
+- Deprecate dialect option on Database Adapter config in favor of client.
+
 ## Version 0.6.0 - 2019-07-07
 
 ### Features
