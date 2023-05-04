@@ -1,5 +1,5 @@
 const test = require('ava');
-const manyRows = require('../fixtures/manyRows');
+const manyRows = require('../fixtures/manyRows.json');
 const Database = require('../../src/Adapters/Database');
 
 function createDummyTable(connection) {

@@ -19,7 +19,7 @@ class Http {
   }
 
   write(rows) {
-    return Promise.all(rows.map(row => got.post(this.config.url, {
+    return Promise.all(rows.map((row) => got.post(this.config.url, {
       body: row,
       json: true,
     })));
