@@ -16,6 +16,13 @@ jobs:
         node-version: [18.x, 19.x, 20.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_USER: integrator
+          POSTGRES_DB: Integrator
+
     steps:
     - name: Checkout
       uses: actions/checkout@v3
