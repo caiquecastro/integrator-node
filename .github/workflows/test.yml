@@ -51,6 +51,8 @@ jobs:
           MYSQL_USER: integrator
           MYSQL_PASSWORD: integrator
           MYSQL_DATABASE: integrator
+        ports:
+          - 3306:3306
         options: >-
           --health-cmd "mysqladmin ping"
           --health-interval 10s
