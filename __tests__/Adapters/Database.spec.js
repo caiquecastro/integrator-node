@@ -57,7 +57,7 @@ test('It fetches from mysql database', async (t) => {
   const adapter = new Database({
     dialect: 'mysql',
     connection: {
-      host: 'mysql',
+      host: 'localhost',
       user: 'integrator',
       password: 'integrator',
       database: 'Integrator',
