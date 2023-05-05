@@ -172,7 +172,7 @@ test.serial('It writes in chunks on sql server database', async (t) => {
   const adapter = new Database({
     dialect: 'mssql',
     connection: {
-      host: 'localhost',
+      host: 'mssql',
       user: 'sa',
       password: 'integrator!23',
       options: {

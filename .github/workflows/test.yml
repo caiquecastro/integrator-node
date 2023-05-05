@@ -37,6 +37,13 @@ jobs:
           MYSQL_USER: integrator
           MYSQL_PASSWORD: integrator
           MYSQL_DATABASE: integrator
+      mssql:
+        image: mcr.microsoft.com/mssql/server
+        env:
+          ACCEPT_EULA: Y
+          SA_PASSWORD: integrator!23
+        ports:
+          - 1433:1433
 
     steps:
     - name: Checkout
