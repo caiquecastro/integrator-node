@@ -21,9 +21,15 @@ jobs:
         image: postgres
         env:
           POSTGRES_USER: integrator
-          POSTGRES_DB: Integrator
+          POSTGRES_DB: integrator
+          POSTGRES_PASSWORD: integrator
         ports:
           - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
     - name: Checkout
