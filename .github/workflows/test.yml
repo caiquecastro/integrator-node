@@ -37,6 +37,12 @@ jobs:
           MYSQL_USER: integrator
           MYSQL_PASSWORD: integrator
           MYSQL_DATABASE: integrator
+        options: >-
+          --health-cmd "mysqladmin ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 10
+
       mssql:
         image: mcr.microsoft.com/mssql/server
         env:
