@@ -17,6 +17,14 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     services:
+      mssql:
+        image: mcr.microsoft.com/mssql/server
+        env:
+          ACCEPT_EULA: Y
+          SA_PASSWORD: integrator!23
+        ports:
+          - 1433:1433
+
       postgres:
         image: postgres
         env:
@@ -42,14 +50,6 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 10
-
-      mssql:
-        image: mcr.microsoft.com/mssql/server
-        env:
-          ACCEPT_EULA: Y
-          SA_PASSWORD: integrator!23
-        ports:
-          - 1433:1433
 
     steps:
     - name: Checkout
