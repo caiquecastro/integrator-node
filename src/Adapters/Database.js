@@ -1,4 +1,4 @@
-const knex = require('knex');
+import knex from 'knex';
 
 const validDatabaseClients = [
   'sqlite',
@@ -27,7 +27,7 @@ function parseConfig(config) {
   return parsedConfig;
 }
 
-class Database {
+export default class Database {
   constructor(config = {}) {
     this.config = parseConfig(config);
 
@@ -44,5 +44,3 @@ class Database {
     return this.connection.batchInsert(this.config.table, rows, 100);
   }
 }
-
-module.exports = Database;

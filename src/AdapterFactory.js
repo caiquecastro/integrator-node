@@ -1,8 +1,8 @@
-const CsvAdapter = require('./Adapters/Csv');
-const HttpAdapter = require('./Adapters/Http');
-const DatabaseAdapter = require('./Adapters/Database');
+import CsvAdapter from './Adapters/Csv';
+import HttpAdapter from './Adapters/Http';
+import DatabaseAdapter from './Adapters/Database';
 
-module.exports = (config) => {
+export default (config) => {
   switch (config.type) {
     case 'database':
       return new DatabaseAdapter(config.options);

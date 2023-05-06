@@ -1,5 +1,5 @@
-const fs = require('fs');
-const csv = require('csv');
+import fs from 'fs';
+import csv from 'csv';
 
 function parseConfig(config) {
   if (!config) {
@@ -13,7 +13,7 @@ function parseConfig(config) {
   return config;
 }
 
-class Csv {
+export default class Csv {
   constructor(config) {
     this.config = parseConfig(config);
   }
@@ -69,5 +69,3 @@ class Csv {
     });
   }
 }
-
-module.exports = Csv;
