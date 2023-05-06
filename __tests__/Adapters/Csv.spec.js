@@ -1,8 +1,8 @@
-const fs = require('fs');
-const del = require('del');
-const test = require('ava');
-const path = require('path');
-const Csv = require('../../src/Adapters/Csv');
+import fs from 'fs';
+import del from 'del';
+import test from 'ava';
+import path from 'path';
+import Csv from '../../src/Adapters/Csv';
 
 test.before(() => fs.mkdirSync('./__tests__/fixtures/tmp'));
 test.afterEach(() => del('./__tests__/fixtures/tmp'));

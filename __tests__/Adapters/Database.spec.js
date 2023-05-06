@@ -1,6 +1,6 @@
-const test = require('ava');
-const manyRows = require('../fixtures/manyRows.json');
-const Database = require('../../src/Adapters/Database');
+import test from 'ava';
+import manyRows from '../fixtures/manyRows.json' assert { type: 'json' };
+import Database from '../../src/Adapters/Database.js';
 
 function createDummyTable(connection) {
   return connection.schema.hasTable('Users')
@@ -55,7 +55,7 @@ test.serial('It fetches from sql server database', async (t) => {
 
 test('It fetches from mysql database', async (t) => {
   const adapter = new Database({
-    client: 'mysql',
+    client: 'mysql2',
     connection: {
       host: 'localhost',
       user: 'integrator',

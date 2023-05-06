@@ -1,6 +1,6 @@
-const test = require('ava');
-const nock = require('nock');
-const Http = require('../../src/Adapters/Http');
+import test from 'ava';
+import nock from 'nock';
+import Http from '../../src/Adapters/Http';
 
 test('It requires url to fetch', async (t) => {
   try {

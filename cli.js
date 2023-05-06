@@ -1,16 +1,16 @@
 #!/usr/bin/env node
-const argv = require('./argv');
-const Integrator = require('./src/Integrator');
-const SettingsParser = require('./src/SettingsParser');
+import argv from './argv';
+import Integrator from './src/Integrator';
+import SettingsParser from './src/SettingsParser';
 
 (async () => {
   const integrator = new Integrator(SettingsParser.parse(argv.settings));
 
   await integrator.run();
 })().then(() => {
-  console.log('Integration finished');
+  process.stdout.write('Integration finished');
   process.exit(0);
 }).catch((err) => {
-  console.error('Integration failed', err);
+  process.stderr.write(`Integration failed ${err.message}`);
   process.exit(1);
 });

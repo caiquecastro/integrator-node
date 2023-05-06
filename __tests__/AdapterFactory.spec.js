@@ -1,8 +1,8 @@
-const test = require('ava');
-const CsvAdapter = require('../src/Adapters/Csv');
-const HttpAdapter = require('../src/Adapters/Http');
-const AdapterFactory = require('../src/AdapterFactory');
-const DatabaseAdapter = require('../src/Adapters/Database');
+import test from 'ava';
+import CsvAdapter from '../src/Adapters/Csv';
+import HttpAdapter from '../src/Adapters/Http';
+import AdapterFactory from '../src/AdapterFactory';
+import DatabaseAdapter from '../src/Adapters/Database';
 
 test('It creates database adapter', async (t) => {
   const adapter = AdapterFactory({

@@ -21,20 +21,20 @@
   "type": "module",
   "devDependencies": {
     "ava": "^5.2.0",
-    "del": "^5.0.0",
-    "eslint": "^8.39.0",
+    "del": "^7.0.0",
+    "eslint": "^8.40.0",
     "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.27.0",
+    "eslint-plugin-import": "^2.27.5",
     "nock": "^13.3.1",
-    "nyc": "^14.1.1"
+    "nyc": "^15.1.0"
   },
   "dependencies": {
     "csv": "^6.2.12",
     "knex": "^2.4.2",
-    "tedious": "^16.0.0",
     "mysql2": "^3.3.0",
     "pg": "^8.10.0",
     "sqlite3": "^5.1.6",
-    "yargs": "^13.2.4"
+    "tedious": "^16.0.0",
+    "yargs": "^17.7.2"
   }
 }

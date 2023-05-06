@@ -10,7 +10,11 @@ const validDatabaseClients = [
 function parseConfig(config) {
   let parsedConfig = config;
 
-  const databaseClient = config.client || config.dialect;
+  if (parsedConfig.client === 'mysql') {
+    parsedConfig.client = 'mysql2';
+  }
+
+  const databaseClient = parsedConfig.client;
 
   if (!validDatabaseClients.includes(databaseClient)) {
     throw new Error('Invalid database client/dialect');
