@@ -1,5 +1,5 @@
-const test = require('ava');
-const Integrator = require('../src/Integrator');
+import test from 'ava';
+import Integrator from '../src/Integrator';
 
 test('It requires source and destination', async (t) => {
   try {
