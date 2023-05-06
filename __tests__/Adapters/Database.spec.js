@@ -76,7 +76,7 @@ test('It fetches from postgres database', async (t) => {
   const adapter = new Database({
     dialect: 'pg',
     connection: {
-      host: 'postgres',
+      host: 'localhost',
       user: 'integrator',
       password: 'integrator',
       database: 'integrator',
