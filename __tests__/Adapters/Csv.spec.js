@@ -1,11 +1,11 @@
 import fs from 'fs';
-import del from 'del';
+import { deleteAsync } from 'del';
 import test from 'ava';
 import path from 'path';
-import Csv from '../../src/Adapters/Csv';
+import Csv from '../../src/Adapters/Csv.js';
 
 test.before(() => fs.mkdirSync('./__tests__/fixtures/tmp'));
-test.afterEach(() => del('./__tests__/fixtures/tmp'));
+test.afterEach(() => deleteAsync('./__tests__/fixtures/tmp'));
 
 test('Requires argument for Csv Adapter', async (t) => {
   try {

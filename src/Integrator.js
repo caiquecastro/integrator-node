@@ -1,4 +1,4 @@
-import AdapterFactory from './AdapterFactory';
+import AdapterFactory from './AdapterFactory.js';
 
 function validateConfig(config = {}) {
   if (!config.source || !config.destination) {

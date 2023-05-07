@@ -1,5 +1,5 @@
 import test from 'ava';
-import Integrator from '../src/Integrator';
+import Integrator from '../src/Integrator.js';
 
 test('It requires source and destination', async (t) => {
   try {

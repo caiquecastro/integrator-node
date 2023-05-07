@@ -1,8 +1,8 @@
 import test from 'ava';
-import CsvAdapter from '../src/Adapters/Csv';
-import HttpAdapter from '../src/Adapters/Http';
-import AdapterFactory from '../src/AdapterFactory';
-import DatabaseAdapter from '../src/Adapters/Database';
+import CsvAdapter from '../src/Adapters/Csv.js';
+import HttpAdapter from '../src/Adapters/Http.js';
+import AdapterFactory from '../src/AdapterFactory.js';
+import DatabaseAdapter from '../src/Adapters/Database.js';
 
 test('It creates database adapter', async (t) => {
   const adapter = AdapterFactory({

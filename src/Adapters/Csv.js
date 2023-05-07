@@ -1,5 +1,5 @@
 import fs from 'fs';
-import csv from 'csv';
+import * as csv from 'csv';
 
 function parseConfig(config) {
   if (!config) {

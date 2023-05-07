@@ -55,9 +55,9 @@ test.serial('It fetches from sql server database', async (t) => {
 
 test('It fetches from mysql database', async (t) => {
   const adapter = new Database({
-    client: 'mysql2',
+    client: 'mysql',
     connection: {
-      host: 'localhost',
+      host: '127.0.0.1',
       user: 'integrator',
       password: 'integrator',
       database: 'integrator',
@@ -76,9 +76,9 @@ test('It fetches from postgres database', async (t) => {
   const adapter = new Database({
     client: 'pg',
     connection: {
-      host: 'localhost',
+      host: '127.0.0.1',
       user: 'integrator',
-      password: 'integrator',
+      password: 'integrator!23',
       database: 'integrator',
     },
     table: 'Users',

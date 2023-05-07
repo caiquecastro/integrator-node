@@ -1,6 +1,6 @@
 import test from 'ava';
 import nock from 'nock';
-import Http from '../../src/Adapters/Http';
+import Http from '../../src/Adapters/Http.js';
 
 test('It requires url to fetch', async (t) => {
   try {
