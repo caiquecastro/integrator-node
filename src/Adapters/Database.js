@@ -27,7 +27,6 @@ function parseConfig(config) {
     };
   }
 
-  console.log({ parsedConfig });
   return parsedConfig;
 }
 

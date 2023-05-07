@@ -1,6 +1,15 @@
 import test from 'ava';
-import nock from 'nock';
+import server from '../fixtures/server.js';
 import Http from '../../src/Adapters/Http.js';
+
+test.before(() => server.listen());
+
+// Reset any request handlers that we may add during the tests,
+// so they don't affect other tests.
+test.afterEach(() => server.resetHandlers());
+
+// Clean up after the tests are finished.
+test.after(() => server.close());
 
 test('It requires url to fetch', async (t) => {
   try {
@@ -20,14 +29,6 @@ test('It fetches the records', async (t) => {
   const adapter = new Http({
     url: 'https://jsonplaceholder.typicode.com/users',
   });
-
-  nock('https://jsonplaceholder.typicode.com')
-    .get('/users')
-    .reply(200, [{
-      id: 1,
-      name: 'John Doe',
-      email: 'johndoe@example.com',
-    }]);
 
   const result = await adapter.fetch();
 
