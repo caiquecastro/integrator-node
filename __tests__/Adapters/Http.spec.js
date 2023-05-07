@@ -1,4 +1,5 @@
 import test from 'ava';
+import { rest } from 'msw';
 import server from '../fixtures/server.js';
 import Http from '../../src/Adapters/Http.js';
 
@@ -30,6 +31,16 @@ test('It fetches the records', async (t) => {
     url: 'https://jsonplaceholder.typicode.com/users',
   });
 
+  server.use(
+    rest.get('https://jsonplaceholder.typicode.com/users', (req, res, ctx) => res(
+      ctx.json([{
+        id: 1,
+        name: 'John Doe',
+        email: 'johndoe@example.com',
+      }]),
+    )),
+  );
+
   const result = await adapter.fetch();
 
   t.deepEqual(result, [
@@ -48,13 +59,18 @@ test('It writes the records', async (t) => {
 
   let requestCount = 0;
 
-  nock('https://jsonplaceholder.typicode.com')
-    .post('/users')
-    .reply(201, (_, requestBody) => {
+  server.use(
+    rest.post('https://jsonplaceholder.typicode.com/users', (req, res, ctx) => {
       requestCount += 1;
-
-      return requestBody;
-    });
+      return res(
+        ctx.json([{
+          id: 1,
+          name: 'John Doe',
+          email: 'johndoe@example.com',
+        }]),
+      );
+    }),
+  );
 
   await adapter.write([
     {
