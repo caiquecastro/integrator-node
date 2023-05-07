@@ -36,7 +36,7 @@ jobs:
         env:
           POSTGRES_USER: integrator
           POSTGRES_DB: integrator
-          POSTGRES_PASSWORD: integrator
+          POSTGRES_PASSWORD: integrator!23
         ports:
           - 5432:5432
         options: >-
