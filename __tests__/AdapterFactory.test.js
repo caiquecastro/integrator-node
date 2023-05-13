@@ -1,10 +1,12 @@
-import test from 'ava';
+import { describe, it } from 'node:test';
+import assert from 'node:assert';
 import CsvAdapter from '../src/Adapters/Csv.js';
 import HttpAdapter from '../src/Adapters/Http.js';
 import AdapterFactory from '../src/AdapterFactory.js';
 import DatabaseAdapter from '../src/Adapters/Database.js';
 
-test('It creates database adapter', async (t) => {
+describe('Adapter Factory', () => {
+it('It creates database adapter', async (t) => {
   const adapter = AdapterFactory({
     type: 'database',
     options: {
@@ -12,10 +14,10 @@ test('It creates database adapter', async (t) => {
     },
   });
 
-  t.true(adapter instanceof DatabaseAdapter);
+  assert.equal(adapter instanceof DatabaseAdapter, true);
 });
 
-test('It creates csv adapter', async (t) => {
+it('It creates csv adapter', async (t) => {
   const adapter = AdapterFactory({
     type: 'csv',
     options: {
@@ -23,10 +25,10 @@ test('It creates csv adapter', async (t) => {
     },
   });
 
-  t.true(adapter instanceof CsvAdapter);
+  assert.equal(adapter instanceof CsvAdapter, true);
 });
 
-test('It creates http adapter', async (t) => {
+it('It creates http adapter', async (t) => {
   const adapter = AdapterFactory({
     type: 'http',
     options: {
@@ -34,5 +36,6 @@ test('It creates http adapter', async (t) => {
     },
   });
 
-  t.true(adapter instanceof HttpAdapter);
+  assert.equal(adapter instanceof HttpAdapter, true);
+});
 });

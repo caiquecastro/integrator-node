@@ -1,32 +1,30 @@
-import test from 'ava';
 import { rest } from 'msw';
+import assert from 'node:assert';
+import { describe, it, before, afterEach, after } from 'node:test';
 import server from '../fixtures/server.js';
 import Http from '../../src/Adapters/Http.js';
 
-test.before(() => server.listen());
+describe('Http Adapter', () => {
+  before(() => server.listen());
 
-// Reset any request handlers that we may add during the tests,
-// so they don't affect other tests.
-test.afterEach(() => server.resetHandlers());
+  // Reset any request handlers that we may add during the tests,
+  // so they don't affect other tests.
+  afterEach(() => server.resetHandlers());
 
-// Clean up after the tests are finished.
-test.after(() => server.close());
+  // Clean up after the tests are finished.
+  after(() => server.close());
 
-test('It requires url to fetch', async (t) => {
-  try {
-    const adapter = new Http({
-      //
-    });
+  it('It requires url to fetch', async () => {
+    assert.throws(() => {
+      const adapter = new Http({
+        //
+      });
 
-    await adapter.fetch();
+      assert.ok(adapter);
+    }, new Error('The url must be provided for http integration'));
+  });
 
-    t.fail();
-  } catch (err) {
-    t.is(err.message, 'The url must be provided for http integration');
-  }
-});
-
-test('It fetches the records', async (t) => {
+it('It fetches the records', async () => {
   const adapter = new Http({
     url: 'https://jsonplaceholder.typicode.com/users',
   });
@@ -43,7 +41,7 @@ test('It fetches the records', async (t) => {
 
   const result = await adapter.fetch();
 
-  t.deepEqual(result, [
+  assert.deepEqual(result, [
     {
       id: 1,
       name: 'John Doe',
@@ -52,7 +50,7 @@ test('It fetches the records', async (t) => {
   ]);
 });
 
-test('It writes the records', async (t) => {
+it('It writes the records', async (t) => {
   const adapter = new Http({
     url: 'https://jsonplaceholder.typicode.com/users',
   });
@@ -79,5 +77,6 @@ test('It writes the records', async (t) => {
     },
   ]);
 
-  t.is(requestCount, 1);
+  assert.equal(requestCount, 1);
+});
 });
