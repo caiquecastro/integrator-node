@@ -1,34 +1,34 @@
-import fs from 'fs';
-import { deleteAsync } from 'del';
-import { describe, it, before, afterEach } from 'node:test';
+import fs from 'node:fs';
+import { describe, it, beforeEach, afterEach } from 'node:test';
 import assert from 'node:assert';
 import path from 'path';
 import Csv from '../../src/Adapters/Csv.js';
 
-before(() => fs.mkdirSync(path.resolve('./__tests__/fixtures/tmp')));
-afterEach(() => deleteAsync('./__tests__/fixtures/tmp'));
+function deleteDir(pathName) {
+  fs.rmSync(path.resolve(pathName), { recursive: true, force: true });
+}
 
 describe('Csv Adapter', () => {
-  it('Requires argument for Csv Adapter', async () => {
-    try {
-      const adapter = new Csv();
+  beforeEach(() => {
+    deleteDir('./__tests__/fixtures/tmp');
+    fs.mkdirSync(path.resolve('./__tests__/fixtures/tmp'));
+  });
+  afterEach(() => deleteDir('./__tests__/fixtures/tmp'));
 
-      await adapter.fetch();
-    } catch (err) {
-      assert.equal(err.message, 'It\'s required to provide options for the integration');
-    }
+  it('Requires argument for Csv Adapter', () => {
+    assert.throws(() => {
+      const adapter = new Csv();
+      assert.ok(adapter);
+    }, new Error('It\'s required to provide options for the integration'));
   });
 
   it('Requires path on options for Csv Adapter', async () => {
-    try {
+    assert.throws(() => {
       const adapter = new Csv({
         //
       });
-
-      await adapter.fetch();
-    } catch (err) {
-      assert.equal(err.message, 'It\'s required to provide a file for the csv file');
-    }
+      assert.ok(adapter);
+    }, new Error('It\'s required to provide a file for the csv file'));
   });
 
   it('It fetches the records', async () => {

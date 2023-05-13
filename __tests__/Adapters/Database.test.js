@@ -1,6 +1,6 @@
-import { describe, it } from 'node:test';
+import { describe, it, afterEach } from 'node:test';
 import assert from 'node:assert';
-import manyRows from '../fixtures/manyRows.json' assert { type: 'json' };
+import fs from 'node:fs';
 import Database from '../../src/Adapters/Database.js';
 
 function createDummyTable(connection) {
@@ -19,10 +19,18 @@ function createDummyTable(connection) {
     });
 }
 
+const manyRows = fs.readFileSync('__tests__/fixtures/manyRows.json', {
+  encoding: 'utf-8',
+});
+
 describe('Database adapter', () => {
+  let adapter;
+
+  afterEach(() => adapter?.tearDown());
+
   it('It validates the database dialect', () => {
     assert.throws(() => {
-      const adapter = new Database({
+      adapter = new Database({
         client: 'invalid',
       });
       assert.ok(adapter);
@@ -30,7 +38,7 @@ describe('Database adapter', () => {
   });
 
   it('It fetches from sql server database', async () => {
-    const adapter = new Database({
+    adapter = new Database({
       client: 'mssql',
       connection: {
         host: 'localhost',
@@ -46,12 +54,10 @@ describe('Database adapter', () => {
     await createDummyTable(adapter.connection);
 
     await adapter.fetch();
-
-    //t.pass();
   });
 
   it('It fetches from mysql database', async (t) => {
-    const adapter = new Database({
+    adapter = new Database({
       client: 'mysql',
       connection: {
         host: '127.0.0.1',
@@ -68,7 +74,7 @@ describe('Database adapter', () => {
   });
 
   it('It fetches from postgres database', async () => {
-    const adapter = new Database({
+    adapter = new Database({
       client: 'pg',
       connection: {
         host: '127.0.0.1',
@@ -85,19 +91,19 @@ describe('Database adapter', () => {
   });
 
   it('It fetches the records', async (t) => {
-    const databaseAdapter = new Database({
+    adapter = new Database({
       client: 'sqlite',
       connection: ':memory:',
       table: 'Users',
     });
 
-    await databaseAdapter.connection.schema.createTable('Users', (table) => {
+    await adapter.connection.schema.createTable('Users', (table) => {
       table.string('name');
     });
 
-    await databaseAdapter.connection.insert({ name: 'John' }).into('Users');
+    await adapter.connection.insert({ name: 'John' }).into('Users');
 
-    const result = await databaseAdapter.fetch();
+    const result = await adapter.fetch();
 
     assert.deepEqual(result, [
       {
@@ -106,79 +112,77 @@ describe('Database adapter', () => {
     ]);
   });
 
-// it('It fetches specified columns for the records', async (t) => {
-//   const databaseAdapter = new Database({
-//     client: 'sqlite',
-//     connection: ':memory:',
-//     table: 'Users',
-//     columns: [
-//       'email',
-//     ],
-//   });
+  it('It fetches specified columns for the records', async (t) => {
+    adapter = new Database({
+      client: 'sqlite',
+      connection: ':memory:',
+      table: 'Users',
+      columns: [
+        'email',
+      ],
+    });
 
-//   await databaseAdapter.connection.schema.createTable('Users', (table) => {
-//     table.string('name');
-//     table.string('email');
-//   });
+    await adapter.connection.schema.createTable('Users', (table) => {
+      table.string('name');
+      table.string('email');
+    });
 
-//   await databaseAdapter.connection.insert({
-//     name: 'John',
-//     email: 'johndoe@example.com',
-//   }).into('Users');
+    await adapter.connection.insert({
+      name: 'John',
+      email: 'johndoe@example.com',
+    }).into('Users');
 
-//   const result = await databaseAdapter.fetch();
+    const result = await databaseAdapter.fetch();
 
-//   t.deepEqual(result, [
-//     {
-//       email: 'johndoe@example.com',
-//     },
-//   ]);
-// });
+    assert.deepEqual(result, [
+      {
+        email: 'johndoe@example.com',
+      },
+    ]);
+  });
 
-// it('It writes the records', async (t) => {
-//   const databaseAdapter = new Database({
-//     client: 'sqlite',
-//     connection: ':memory:',
-//     table: 'Users',
-//   });
+  it('It writes the records', async (t) => {
+    adapter = new Database({
+      client: 'sqlite',
+      connection: ':memory:',
+      table: 'Users',
+    });
 
-//   await databaseAdapter.connection.schema.createTable('Users', (table) => {
-//     table.string('name');
-//   });
+    await adapter.connection.schema.createTable('Users', (table) => {
+      table.string('name');
+    });
 
-//   await databaseAdapter.write([
-//     {
-//       name: 'John',
-//     },
-//   ]);
+    await adapter.write([
+      {
+        name: 'John',
+      },
+    ]);
 
-//   const results = await databaseAdapter.connection.select().from('Users');
+    const results = await adapter.connection.select().from('Users');
 
-//   t.deepEqual(results, [
-//     {
-//       name: 'John',
-//     },
-//   ]);
-// });
+    assert.deepEqual(results, [
+      {
+        name: 'John',
+      },
+    ]);
+  });
 
-// test.serial('It writes in chunks on sql server database', async (t) => {
-//   const adapter = new Database({
-//     client: 'mssql',
-//     connection: {
-//       host: 'localhost',
-//       user: 'sa',
-//       password: 'integrator!23',
-//       options: {
-//         encrypt: false,
-//       },
-//     },
-//     table: 'Users',
-//   });
+  it('It writes in chunks on sql server database', async (t) => {
+    adapter = new Database({
+      client: 'mssql',
+      connection: {
+        host: 'localhost',
+        user: 'sa',
+        password: 'integrator!23',
+        options: {
+          encrypt: false,
+        },
+      },
+      table: 'Users',
+    });
 
-//   await createDummyTable(adapter.connection);
+    await createDummyTable(adapter.connection);
 
-//   await adapter.write(manyRows);
-
-//   t.pass();
-// });
+    assert.deepEqual(await adapter.write(manyRows), [1, 2]);
+  });
 });

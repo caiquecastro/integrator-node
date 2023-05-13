@@ -9,7 +9,8 @@
   "main": "index.js",
   "bin": "cli.js",
   "scripts": {
-    "test": "node  --test __tests__",
+    "test": "node --test __tests__",
+    "test:watch": "node --watch --test __tests__",
     "lint": "eslint ."
   },
   "keywords": [

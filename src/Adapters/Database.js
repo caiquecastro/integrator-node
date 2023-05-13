@@ -46,4 +46,8 @@ export default class Database {
   write(rows = []) {
     return this.connection.batchInsert(this.config.table, rows, 100);
   }
+
+  async tearDown() {
+    await this.connection.destroy();
+  }
 }
