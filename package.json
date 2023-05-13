@@ -9,7 +9,7 @@
   "main": "index.js",
   "bin": "cli.js",
   "scripts": {
-    "test": "nyc ava",
+    "test": "node  --test __tests__",
     "lint": "eslint ."
   },
   "keywords": [
