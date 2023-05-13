@@ -132,7 +132,7 @@ describe('Database adapter', () => {
       email: 'johndoe@example.com',
     }).into('Users');
 
-    const result = await databaseAdapter.fetch();
+    const result = await adapter.fetch();
 
     assert.deepEqual(result, [
       {
