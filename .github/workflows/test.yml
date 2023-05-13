@@ -49,7 +49,7 @@ jobs:
         env:
           MYSQL_ROOT_PASSWORD: integrator!23
           MYSQL_USER: integrator
-          MYSQL_PASSWORD: integrator
+          MYSQL_PASSWORD: integrator!23
           MYSQL_DATABASE: integrator
           MYSQL_AUTHENTICATION_PLUGIN: mysql_native_password
         ports:
