@@ -22,7 +22,7 @@ function createDummyTable(connection) {
 const manyRows = JSON.parse(
   fs.readFileSync('__tests__/fixtures/manyRows.json', {
     encoding: 'utf-8',
-  })
+  }),
 );
 
 describe('Database adapter', () => {
@@ -58,7 +58,7 @@ describe('Database adapter', () => {
     await adapter.fetch();
   });
 
-  it('It fetches from mysql database', async (t) => {
+  it('It fetches from mysql database', async () => {
     adapter = new Database({
       client: 'mysql',
       connection: {
@@ -92,7 +92,7 @@ describe('Database adapter', () => {
     assert.deepEqual(await adapter.fetch(), []);
   });
 
-  it('It fetches the records', async (t) => {
+  it('It fetches the records', async () => {
     adapter = new Database({
       client: 'sqlite',
       connection: ':memory:',
@@ -114,7 +114,7 @@ describe('Database adapter', () => {
     ]);
   });
 
-  it('It fetches specified columns for the records', async (t) => {
+  it('It fetches specified columns for the records', async () => {
     adapter = new Database({
       client: 'sqlite',
       connection: ':memory:',
@@ -143,7 +143,7 @@ describe('Database adapter', () => {
     ]);
   });
 
-  it('It writes the records', async (t) => {
+  it('It writes the records', async () => {
     adapter = new Database({
       client: 'sqlite',
       connection: ':memory:',
@@ -169,7 +169,7 @@ describe('Database adapter', () => {
     ]);
   });
 
-  it('It writes in chunks on sql server database', async (t) => {
+  it('It writes in chunks on sql server database', async () => {
     adapter = new Database({
       client: 'mssql',
       connection: {

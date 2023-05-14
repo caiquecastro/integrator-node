@@ -1,5 +1,7 @@
 import fs from 'node:fs';
-import { describe, it, beforeEach, afterEach } from 'node:test';
+import {
+  describe, it, beforeEach, afterEach,
+} from 'node:test';
 import assert from 'node:assert';
 import path from 'path';
 import Csv from '../../src/Adapters/Csv.js';

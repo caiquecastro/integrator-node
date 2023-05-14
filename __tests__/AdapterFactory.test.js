@@ -6,36 +6,36 @@ import AdapterFactory from '../src/AdapterFactory.js';
 import DatabaseAdapter from '../src/Adapters/Database.js';
 
 describe('Adapter Factory', () => {
-it('It creates database adapter', async (t) => {
-  const adapter = AdapterFactory({
-    type: 'database',
-    options: {
-      client: 'sqlite',
-    },
+  it('It creates database adapter', async () => {
+    const adapter = AdapterFactory({
+      type: 'database',
+      options: {
+        client: 'sqlite',
+      },
+    });
+
+    assert.equal(adapter instanceof DatabaseAdapter, true);
   });
 
-  assert.equal(adapter instanceof DatabaseAdapter, true);
-});
+  it('It creates csv adapter', async () => {
+    const adapter = AdapterFactory({
+      type: 'csv',
+      options: {
+        path: 'my-fake-file',
+      },
+    });
 
-it('It creates csv adapter', async (t) => {
-  const adapter = AdapterFactory({
-    type: 'csv',
-    options: {
-      path: 'my-fake-file',
-    },
+    assert.equal(adapter instanceof CsvAdapter, true);
   });
 
-  assert.equal(adapter instanceof CsvAdapter, true);
-});
+  it('It creates http adapter', async () => {
+    const adapter = AdapterFactory({
+      type: 'http',
+      options: {
+        url: 'http://api.com/users',
+      },
+    });
 
-it('It creates http adapter', async (t) => {
-  const adapter = AdapterFactory({
-    type: 'http',
-    options: {
-      url: 'http://api.com/users',
-    },
+    assert.equal(adapter instanceof HttpAdapter, true);
   });
-
-  assert.equal(adapter instanceof HttpAdapter, true);
-});
 });
