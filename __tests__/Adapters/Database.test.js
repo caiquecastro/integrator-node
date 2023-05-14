@@ -19,9 +19,11 @@ function createDummyTable(connection) {
     });
 }
 
-const manyRows = fs.readFileSync('__tests__/fixtures/manyRows.json', {
-  encoding: 'utf-8',
-});
+const manyRows = JSON.parse(
+  fs.readFileSync('__tests__/fixtures/manyRows.json', {
+    encoding: 'utf-8',
+  })
+);
 
 describe('Database adapter', () => {
   let adapter;
