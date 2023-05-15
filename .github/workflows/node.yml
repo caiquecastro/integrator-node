@@ -11,6 +11,49 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    services:
+      mssql:
+        image: mcr.microsoft.com/mssql/server
+        env:
+          ACCEPT_EULA: Y
+          SA_PASSWORD: integrator!23
+        ports:
+          - 1433:1433
+        options: >-
+          --name=mssql
+          --health-cmd="/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P 'integrator!23' -Q 'SELECT 1'"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_USER: integrator
+          POSTGRES_DB: integrator
+          POSTGRES_PASSWORD: integrator!23
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+      mysql:
+        image: bitnami/mysql:8.0.33
+        env:
+          MYSQL_ROOT_PASSWORD: integrator!23
+          MYSQL_USER: integrator
+          MYSQL_PASSWORD: integrator!23
+          MYSQL_DATABASE: integrator
+          MYSQL_AUTHENTICATION_PLUGIN: mysql_native_password
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd "mysqladmin ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 10
+
     strategy:
       matrix:
         node-version: [12.x]
