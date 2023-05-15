@@ -10,10 +10,10 @@ const validDatabaseClients = [
 function parseConfig(config) {
   let parsedConfig = config;
 
-  const databaseClient = config.client || config.dialect;
+  const databaseClient = config.client;
 
   if (!validDatabaseClients.includes(databaseClient)) {
-    throw new Error('Invalid database client/dialect');
+    throw new Error('Invalid database client');
   }
 
   if (databaseClient === 'sqlite') {

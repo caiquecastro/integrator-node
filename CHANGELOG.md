@@ -1,5 +1,18 @@
 # CHANGELOG
 
+## Version 0.8.0 - 2023-05-15
+
+## Breaking Changes
+
+- Deprecate dialect option on Database Adapter config in favor of client.
+- Deprecate node 12 or earlier.
+
+## Version 0.7.0 - 2023-05-15
+
+## Breaking Changes
+
+- Deprecate node 10 or earlier.
+
 ## Version 0.6.0 - 2019-07-07
 
 ### Features

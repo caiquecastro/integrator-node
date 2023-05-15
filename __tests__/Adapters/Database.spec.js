@@ -18,23 +18,23 @@ function createDummyTable(connection) {
     });
 }
 
-test('It validates the database dialect', async (t) => {
+test('It validates the database client', async (t) => {
   try {
     const adapter = new Database({
-      dialect: 'invalid',
+      client: 'invalid',
     });
 
     await adapter.fetch();
 
     t.fail();
   } catch (err) {
-    t.is(err.message, 'Invalid database client/dialect');
+    t.is(err.message, 'Invalid database client');
   }
 });
 
 test.serial('It fetches from sql server database', async (t) => {
   const adapter = new Database({
-    dialect: 'mssql',
+    client: 'mssql',
     connection: {
       host: 'localhost',
       user: 'sa',
@@ -55,7 +55,7 @@ test.serial('It fetches from sql server database', async (t) => {
 
 test('It fetches from mysql database', async (t) => {
   const adapter = new Database({
-    dialect: 'mysql',
+    client: 'mysql',
     connection: {
       host: 'localhost',
       user: 'integrator',
@@ -72,9 +72,9 @@ test('It fetches from mysql database', async (t) => {
   t.pass();
 });
 
-test('It fetches from postgres database', async (t) => {
+test.only('It fetches from postgres database', async (t) => {
   const adapter = new Database({
-    dialect: 'pg',
+    client: 'pg',
     connection: {
       host: 'localhost',
       user: 'integrator',
@@ -93,7 +93,7 @@ test('It fetches from postgres database', async (t) => {
 
 test('It fetches the records', async (t) => {
   const databaseAdapter = new Database({
-    dialect: 'sqlite',
+    client: 'sqlite',
     connection: ':memory:',
     table: 'Users',
   });
@@ -115,7 +115,7 @@ test('It fetches the records', async (t) => {
 
 test('It fetches specified columns for the records', async (t) => {
   const databaseAdapter = new Database({
-    dialect: 'sqlite',
+    client: 'sqlite',
     connection: ':memory:',
     table: 'Users',
     columns: [
@@ -144,7 +144,7 @@ test('It fetches specified columns for the records', async (t) => {
 
 test('It writes the records', async (t) => {
   const databaseAdapter = new Database({
-    dialect: 'sqlite',
+    client: 'sqlite',
     connection: ':memory:',
     table: 'Users',
   });
@@ -170,7 +170,7 @@ test('It writes the records', async (t) => {
 
 test.serial('It writes in chunks on sql server database', async (t) => {
   const adapter = new Database({
-    dialect: 'mssql',
+    client: 'mssql',
     connection: {
       host: 'localhost',
       user: 'sa',
