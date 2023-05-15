@@ -1,5 +1,3 @@
-const got = require('got');
-
 function parseConfig(config) {
   if (!config.url) {
     throw new Error('The url must be provided for http integration');
@@ -8,22 +6,20 @@ function parseConfig(config) {
   return config;
 }
 
-class Http {
+export default class Http {
   constructor(config = {}) {
     this.config = parseConfig(config);
   }
 
   fetch() {
-    return got(this.config.url)
-      .then(({ body }) => JSON.parse(body));
+    return fetch(this.config.url)
+      .then((res) => res.json());
   }
 
   write(rows) {
-    return Promise.all(rows.map(row => got.post(this.config.url, {
-      body: row,
-      json: true,
+    return Promise.all(rows.map((row) => fetch(this.config.url, {
+      method: 'POST',
+      body: JSON.stringify(row),
     })));
   }
 }
-
-module.exports = Http;

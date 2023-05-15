@@ -1,9 +1,7 @@
-const fs = require('fs');
+import fs from 'fs';
 
-class SettingsParser {
+export default class SettingsParser {
   static parse(filePath) {
     return JSON.parse(fs.readFileSync(filePath, 'utf-8'));
   }
 }
-
-module.exports = SettingsParser;

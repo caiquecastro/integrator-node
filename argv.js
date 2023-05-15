@@ -1,6 +1,6 @@
-const yargs = require('yargs');
+import yargs from 'yargs';
 
-module.exports = yargs
+export default yargs
   .option('settings')
   .demandOption(['settings'])
   .argv;

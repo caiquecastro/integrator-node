@@ -1,4 +1,4 @@
-const AdapterFactory = require('./AdapterFactory');
+import AdapterFactory from './AdapterFactory.js';
 
 function validateConfig(config = {}) {
   if (!config.source || !config.destination) {
@@ -14,7 +14,7 @@ function validateConfig(config = {}) {
   return config;
 }
 
-class Integrator {
+export default class Integrator {
   constructor(config) {
     this.config = validateConfig(config);
 
@@ -28,5 +28,3 @@ class Integrator {
     return this.destination.write(result);
   }
 }
-
-module.exports = Integrator;

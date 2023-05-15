@@ -1,4 +1,4 @@
-const knex = require('knex');
+import knex from 'knex';
 
 const validDatabaseClients = [
   'sqlite',
@@ -10,10 +10,14 @@ const validDatabaseClients = [
 function parseConfig(config) {
   let parsedConfig = config;
 
-  const databaseClient = config.client || config.dialect;
+  const databaseClient = parsedConfig.client;
 
   if (!validDatabaseClients.includes(databaseClient)) {
     throw new Error('Invalid database client/dialect');
+  }
+
+  if (parsedConfig.client === 'mysql') {
+    parsedConfig.client = 'mysql2';
   }
 
   if (databaseClient === 'sqlite') {
@@ -26,7 +30,7 @@ function parseConfig(config) {
   return parsedConfig;
 }
 
-class Database {
+export default class Database {
   constructor(config = {}) {
     this.config = parseConfig(config);
 
@@ -42,6 +46,8 @@ class Database {
   write(rows = []) {
     return this.connection.batchInsert(this.config.table, rows, 100);
   }
-}
 
-module.exports = Database;
+  async tearDown() {
+    await this.connection.destroy();
+  }
+}

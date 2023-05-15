@@ -1,3 +1,3 @@
-const Integrator = require('./src/Integrator');
+import Integrator from './src/Integrator.js';
 
-module.exports = Integrator;
+export default Integrator;
