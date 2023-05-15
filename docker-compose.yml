@@ -23,5 +23,6 @@ services:
     environment:
       - POSTGRES_USER=integrator
       - POSTGRES_DB=Integrator
+      - POSTGRES_PASSWORD=integrator!23
     ports:
       - 5432:5432

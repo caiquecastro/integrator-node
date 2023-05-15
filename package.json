@@ -1,6 +1,6 @@
 {
   "name": "integrator-node",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "A integration tool between systems, platforms and protocols",
   "homepage": "https://github.com/caiquecastro/integrator-node",
   "repository": {
@@ -30,11 +30,11 @@
   "dependencies": {
     "csv": "^5.1.1",
     "got": "^10.7.0",
-    "knex": "^0.18.3",
+    "knex": "^2.4.2",
     "mssql": "^5.1.0",
     "mysql": "^2.17.1",
-    "pg": "^7.11.0",
-    "sqlite3": "^4.0.9",
+    "pg": "^8.11.0",
+    "sqlite3": "^5.1.6",
     "yargs": "^13.2.4"
   }
 }
