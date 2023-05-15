@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Version 0.9.0 - TBD
+
+## Breaking Changes
+
+- Deprecate node 14 or earlier.
+
 ## Version 0.8.0 - 2023-05-15
 
 ## Breaking Changes
