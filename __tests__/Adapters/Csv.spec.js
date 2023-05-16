@@ -1,12 +1,11 @@
 const fs = require('fs');
-const del = require('del');
 const path = require('path');
 const { t } = require('../helpers');
 const Csv = require('../../src/Adapters/Csv');
 
 describe('Csv Adapter', () => {
   beforeEach(() => fs.mkdirSync('./__tests__/fixtures/tmp'));
-  afterEach(() => del('./__tests__/fixtures/tmp'));
+  afterEach(() => fs.rmSync('./__tests__/fixtures/tmp', { recursive: true, force: true }));
 
   it('Requires argument for Csv Adapter', async () => {
     try {
