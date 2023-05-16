@@ -9,7 +9,7 @@
   "main": "index.js",
   "bin": "cli.js",
   "scripts": {
-    "test": "nyc mocha __tests__/**/*.spec.js",
+    "test": "nyc mocha __tests__/**/*.spec.js --exit",
     "lint": "eslint ."
   },
   "keywords": [
