@@ -1,5 +1,6 @@
 const fs = require('fs');
 const csv = require('csv');
+const BaseAdapter = require('./BaseAdapter');
 
 function parseConfig(config) {
   if (!config) {
@@ -13,8 +14,9 @@ function parseConfig(config) {
   return config;
 }
 
-class Csv {
+class Csv extends BaseAdapter {
   constructor(config) {
+    super();
     this.config = parseConfig(config);
   }
 

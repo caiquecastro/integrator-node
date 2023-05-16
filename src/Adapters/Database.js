@@ -1,4 +1,5 @@
 const knex = require('knex');
+const BaseAdapter = require('./BaseAdapter');
 
 const validDatabaseClients = [
   'sqlite',
@@ -26,11 +27,16 @@ function parseConfig(config) {
   return parsedConfig;
 }
 
-class Database {
+class Database extends BaseAdapter {
   constructor(config = {}) {
+    super();
     this.config = parseConfig(config);
 
     this.connection = knex(this.config);
+  }
+
+  close() {
+    return this.connection.destroy();
   }
 
   fetch() {
