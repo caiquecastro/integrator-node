@@ -8,9 +8,9 @@ const SettingsParser = require('./src/SettingsParser');
 
   await integrator.run();
 })().then(() => {
-  console.log('Integration finished');
+  process.stdout.write('Integration finished\n');
   process.exit(0);
 }).catch((err) => {
-  console.error('Integration failed', err);
+  process.stderr.write(`Integration failed: ${err}\n`);
   process.exit(1);
 });
