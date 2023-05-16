@@ -1,79 +1,85 @@
 const fs = require('fs');
 const del = require('del');
-const test = require('ava');
 const path = require('path');
+const { t } = require('../helpers');
 const Csv = require('../../src/Adapters/Csv');
 
-test.before(() => fs.mkdirSync('./__tests__/fixtures/tmp'));
-test.afterEach(() => del('./__tests__/fixtures/tmp'));
+describe('Csv Adapter', () => {
+  beforeEach(() => fs.mkdirSync('./__tests__/fixtures/tmp'));
+  afterEach(() => del('./__tests__/fixtures/tmp'));
 
-test('Requires argument for Csv Adapter', async (t) => {
-  try {
-    const adapter = new Csv();
+  it('Requires argument for Csv Adapter', async () => {
+    try {
+      const adapter = new Csv();
 
-    await adapter.fetch();
-  } catch (err) {
-    t.is(err.message, 'It\'s required to provide options for the integration');
-  }
-});
+      await adapter.fetch();
 
-test('Requires path on options for Csv Adapter', async (t) => {
-  try {
+      t.fail();
+    } catch (err) {
+      t.is(err.message, 'It\'s required to provide options for the integration');
+    }
+  });
+
+  it('Requires path on options for Csv Adapter', async () => {
+    try {
+      const adapter = new Csv({
+        //
+      });
+
+      await adapter.fetch();
+
+      t.fail();
+    } catch (err) {
+      t.is(err.message, 'It\'s required to provide a file for the csv file');
+    }
+  });
+
+  it('It fetches the records', async () => {
     const adapter = new Csv({
-      //
+      path: path.resolve('./__tests__/fixtures/users.csv'),
     });
 
-    await adapter.fetch();
-  } catch (err) {
-    t.is(err.message, 'It\'s required to provide a file for the csv file');
-  }
-});
+    const result = await adapter.fetch();
 
-test('It fetches the records', async (t) => {
-  const adapter = new Csv({
-    path: path.resolve('./__tests__/fixtures/users.csv'),
+    t.deepEqual(result, [
+      {
+        name: 'John',
+        email: 'johndoe@example.com',
+      },
+    ]);
   });
 
-  const result = await adapter.fetch();
+  it('It fetches specified columns for the records', async () => {
+    const adapter = new Csv({
+      path: path.resolve('./__tests__/fixtures/users.csv'),
+      columns: [
+        'email',
+      ],
+    });
 
-  t.deepEqual(result, [
-    {
-      name: 'John',
-      email: 'johndoe@example.com',
-    },
-  ]);
-});
+    const result = await adapter.fetch();
 
-test('It fetches specified columns for the records', async (t) => {
-  const adapter = new Csv({
-    path: path.resolve('./__tests__/fixtures/users.csv'),
-    columns: [
-      'email',
-    ],
+    t.deepEqual(result, [
+      {
+        email: 'johndoe@example.com',
+      },
+    ]);
   });
 
-  const result = await adapter.fetch();
+  it('It writes the records', async () => {
+    const adapter = new Csv({
+      path: path.resolve('./__tests__/fixtures/tmp/users.csv'),
+    });
 
-  t.deepEqual(result, [
-    {
-      email: 'johndoe@example.com',
-    },
-  ]);
-});
+    await adapter.write([
+      {
+        name: 'John',
+        email: 'johndoe@example.com',
+      },
+    ]);
 
-test('It writes the records', async (t) => {
-  const adapter = new Csv({
-    path: path.resolve('./__tests__/fixtures/tmp/users.csv'),
+    const result = fs.readFileSync(path.resolve('./__tests__/fixtures/tmp/users.csv'), 'utf-8');
+
+    t.is(result, 'name;email\nJohn;johndoe@example.com\n');
   });
-
-  await adapter.write([
-    {
-      name: 'John',
-      email: 'johndoe@example.com',
-    },
-  ]);
-
-  const result = fs.readFileSync(path.resolve('./__tests__/fixtures/tmp/users.csv'), 'utf-8');
-
-  t.deepEqual(result, 'name;email\nJohn;johndoe@example.com\n');
 });
