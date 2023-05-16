@@ -23,12 +23,12 @@
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.27.5",
     "mocha": "^10.2.0",
-    "nock": "^11.9.1",
+    "nock": "^13.3.1",
     "nyc": "^15.1.0"
   },
   "dependencies": {
     "csv": "^6.3.0",
-    "got": "^10.7.0",
+    "got": "^11.8.6",
     "knex": "^2.4.2",
     "mysql": "^2.17.1",
     "pg": "^8.11.0",
