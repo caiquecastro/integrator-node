@@ -1,6 +1,10 @@
 class BaseAdapter {
+  constructor() {
+    this.data = null;
+  }
+
   close() {
-    return;
+    this.data = null;
   }
 }
 

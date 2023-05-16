@@ -22,7 +22,9 @@ describe('Database Adapter', () => {
   let adapter;
 
   afterEach(() => {
-    adapter?.close();
+    if (adapter) {
+      adapter.close();
+    }
   });
 
   it('It validates the database client', async () => {
@@ -99,19 +101,19 @@ describe('Database Adapter', () => {
   });
 
   it('It fetches the records', async () => {
-    databaseAdapter = new Database({
+    adapter = new Database({
       client: 'sqlite',
       connection: ':memory:',
       table: 'Users',
     });
 
-    await databaseAdapter.connection.schema.createTable('Users', (table) => {
+    await adapter.connection.schema.createTable('Users', (table) => {
       table.string('name');
     });
 
-    await databaseAdapter.connection.insert({ name: 'John' }).into('Users');
+    await adapter.connection.insert({ name: 'John' }).into('Users');
 
-    const result = await databaseAdapter.fetch();
+    const result = await adapter.fetch();
 
     t.deepEqual(result, [
       {
@@ -121,7 +123,7 @@ describe('Database Adapter', () => {
   });
 
   it('It fetches specified columns for the records', async () => {
-    const databaseAdapter = new Database({
+    adapter = new Database({
       client: 'sqlite',
       connection: ':memory:',
       table: 'Users',
@@ -130,17 +132,17 @@ describe('Database Adapter', () => {
       ],
     });
 
-    await databaseAdapter.connection.schema.createTable('Users', (table) => {
+    await adapter.connection.schema.createTable('Users', (table) => {
       table.string('name');
       table.string('email');
     });
 
-    await databaseAdapter.connection.insert({
+    await adapter.connection.insert({
       name: 'John',
       email: 'johndoe@example.com',
     }).into('Users');
 
-    const result = await databaseAdapter.fetch();
+    const result = await adapter.fetch();
 
     t.deepEqual(result, [
       {
@@ -150,23 +152,23 @@ describe('Database Adapter', () => {
   });
 
   it('It writes the records', async () => {
-    const databaseAdapter = new Database({
+    adapter = new Database({
       client: 'sqlite',
       connection: ':memory:',
       table: 'Users',
     });
 
-    await databaseAdapter.connection.schema.createTable('Users', (table) => {
+    await adapter.connection.schema.createTable('Users', (table) => {
       table.string('name');
     });
 
-    await databaseAdapter.write([
+    await adapter.write([
       {
         name: 'John',
       },
     ]);
 
-    const results = await databaseAdapter.connection.select().from('Users');
+    const results = await adapter.connection.select().from('Users');
 
     t.deepEqual(results, [
       {
@@ -176,7 +178,7 @@ describe('Database Adapter', () => {
   });
 
   it('It writes in chunks on sql server database', async () => {
-    const adapter = new Database({
+    adapter = new Database({
       client: 'mssql',
       connection: {
         host: 'localhost',
