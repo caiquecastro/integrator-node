@@ -19,9 +19,15 @@ function createDummyTable(connection) {
 }
 
 describe('Database Adapter', () => {
+  let adapter;
+
+  afterEach(() => {
+    adapter?.close();
+  });
+
   it('It validates the database client', async () => {
     try {
-      const adapter = new Database({
+      adapter = new Database({
         client: 'invalid',
       });
 
@@ -34,7 +40,7 @@ describe('Database Adapter', () => {
   });
 
   it('It fetches from sql server database', async () => {
-    const adapter = new Database({
+    adapter = new Database({
       client: 'mssql',
       connection: {
         host: 'localhost',
@@ -55,7 +61,7 @@ describe('Database Adapter', () => {
   });
 
   it('It fetches from mysql database', async () => {
-    const adapter = new Database({
+    adapter = new Database({
       client: 'mysql',
       connection: {
         host: 'localhost',
@@ -74,7 +80,7 @@ describe('Database Adapter', () => {
   });
 
   it('It fetches from postgres database', async () => {
-    const adapter = new Database({
+    adapter = new Database({
       client: 'pg',
       connection: {
         host: 'localhost',
@@ -93,7 +99,7 @@ describe('Database Adapter', () => {
   });
 
   it('It fetches the records', async () => {
-    const databaseAdapter = new Database({
+    databaseAdapter = new Database({
       client: 'sqlite',
       connection: ':memory:',
       table: 'Users',

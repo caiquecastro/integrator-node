@@ -25,7 +25,12 @@ class Integrator {
   async run() {
     const result = await this.source.fetch();
 
-    return this.destination.write(result);
+    const output = await this.destination.write(result);
+
+    await this.source.close();
+    await this.destination.close();
+
+    return output;
   }
 }
 

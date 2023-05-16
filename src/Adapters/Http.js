@@ -1,4 +1,5 @@
 const got = require('got');
+const BaseAdapter = require('./BaseAdapter');
 
 function parseConfig(config) {
   if (!config.url) {
@@ -8,8 +9,9 @@ function parseConfig(config) {
   return config;
 }
 
-class Http {
+class Http extends BaseAdapter {
   constructor(config = {}) {
+    super();
     this.config = parseConfig(config);
   }
 
