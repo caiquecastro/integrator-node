@@ -18,6 +18,13 @@ function createDummyTable(connection) {
     });
 }
 
+async function insertDummyUsersData(connection) {
+  await connection.insert({
+    name: 'John',
+    email: 'johndoe@example.com',
+  }).into('Users');
+}
+
 describe('Database Adapter', () => {
   let adapter;
 
@@ -107,11 +114,9 @@ describe('Database Adapter', () => {
       table: 'Users',
     });
 
-    await adapter.connection.schema.createTable('Users', (table) => {
-      table.string('name');
-    });
+    await createDummyTable(adapter.connection);
 
-    await adapter.connection.insert({ name: 'John' }).into('Users');
+    await insertDummyUsersData(adapter.connection);
 
     const result = await adapter.fetch();
 
@@ -132,15 +137,9 @@ describe('Database Adapter', () => {
       ],
     });
 
-    await adapter.connection.schema.createTable('Users', (table) => {
-      table.string('name');
-      table.string('email');
-    });
+    await createDummyTable(adapter.connection);
 
-    await adapter.connection.insert({
-      name: 'John',
-      email: 'johndoe@example.com',
-    }).into('Users');
+    await insertDummyUsersData(adapter.connection);
 
     const result = await adapter.fetch();
 
@@ -158,9 +157,7 @@ describe('Database Adapter', () => {
       table: 'Users',
     });
 
-    await adapter.connection.schema.createTable('Users', (table) => {
-      table.string('name');
-    });
+    await createDummyTable(adapter.connection);
 
     await adapter.write([
       {
