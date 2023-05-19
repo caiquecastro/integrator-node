@@ -17,6 +17,13 @@ function parseConfig(config) {
     throw new Error('Invalid database client');
   }
 
+  if (databaseClient === 'mysql') {
+    parsedConfig = {
+      ...parsedConfig,
+      client: 'mysql2',
+    };
+  }
+
   if (databaseClient === 'sqlite') {
     parsedConfig = {
       ...parsedConfig,
