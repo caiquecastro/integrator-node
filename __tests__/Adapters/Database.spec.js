@@ -12,8 +12,7 @@ function createDummyTable(connection) {
       return connection.schema.createTable('Users', (table) => {
         table.increments('id');
         table.string('name');
-        table.string('role');
-        table.integer('age');
+        table.string('email');
       });
     });
 }
