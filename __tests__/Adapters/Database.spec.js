@@ -2,7 +2,7 @@ const { t } = require('../helpers');
 const manyRows = require('../fixtures/manyRows.json');
 const Database = require('../../src/Adapters/Database');
 
-function createDummyTable(connection) {
+function createDummyTable(connection, columns = []) {
   return connection.schema.hasTable('Users')
     .then((exists) => {
       if (exists) {
@@ -12,7 +12,15 @@ function createDummyTable(connection) {
       return connection.schema.createTable('Users', (table) => {
         table.increments('id');
         table.string('name');
-        table.string('email');
+        if (columns.includes('email')) {
+          table.string('email');
+        }
+        if (columns.includes('role')) {
+          table.string('role');
+        }
+        if (columns.includes('age')) {
+          table.integer('age');
+        }
       });
     });
 }
@@ -113,7 +121,7 @@ describe('Database Adapter', () => {
       table: 'Users',
     });
 
-    await createDummyTable(adapter.connection);
+    await createDummyTable(adapter.connection, ['email']);
 
     await insertDummyUsersData(adapter.connection);
 
@@ -121,7 +129,9 @@ describe('Database Adapter', () => {
 
     t.deepEqual(result, [
       {
+        id: 1,
         name: 'John',
+        email: 'johndoe@example.com',
       },
     ]);
   });
@@ -136,7 +146,7 @@ describe('Database Adapter', () => {
       ],
     });
 
-    await createDummyTable(adapter.connection);
+    await createDummyTable(adapter.connection, ['email']);
 
     await insertDummyUsersData(adapter.connection);
 
@@ -156,11 +166,12 @@ describe('Database Adapter', () => {
       table: 'Users',
     });
 
-    await createDummyTable(adapter.connection);
+    await createDummyTable(adapter.connection, ['email']);
 
     await adapter.write([
       {
         name: 'John',
+        email: 'johndoe@example.com',
       },
     ]);
 
@@ -168,7 +179,9 @@ describe('Database Adapter', () => {
 
     t.deepEqual(results, [
       {
+        id: 1,
         name: 'John',
+        email: 'johndoe@example.com',
       },
     ]);
   });
@@ -187,7 +200,7 @@ describe('Database Adapter', () => {
       table: 'Users',
     });
 
-    await createDummyTable(adapter.connection);
+    await createDummyTable(adapter.connection, ['role', 'age']);
 
     await adapter.write(manyRows);
   });
