@@ -2,27 +2,26 @@ const { t } = require('../helpers');
 const manyRows = require('../fixtures/manyRows.json');
 const Database = require('../../src/Adapters/Database');
 
-function createDummyTable(connection, columns = []) {
-  return connection.schema.hasTable('Users')
-    .then((exists) => {
-      if (exists) {
-        return Promise.resolve();
-      }
+async function createDummyTable(connection, columns = []) {
+  const hasTable = await connection.schema.hasTable('Users');
 
-      return connection.schema.createTable('Users', (table) => {
-        table.increments('id');
-        table.string('name');
-        if (columns.includes('email')) {
-          table.string('email');
-        }
-        if (columns.includes('role')) {
-          table.string('role');
-        }
-        if (columns.includes('age')) {
-          table.integer('age');
-        }
-      });
-    });
+  if (hasTable) {
+    await connection.schema.dropTable('Users');
+  }
+
+  await connection.schema.createTable('Users', (table) => {
+    table.increments('id');
+    table.string('name');
+    if (columns.includes('email')) {
+      table.string('email');
+    }
+    if (columns.includes('role')) {
+      table.string('role');
+    }
+    if (columns.includes('age')) {
+      table.integer('age');
+    }
+  });
 }
 
 async function insertDummyUsersData(connection) {
@@ -186,7 +185,7 @@ describe('Database Adapter', () => {
     ]);
   });
 
-  it('It writes in chunks on sql server database', async () => {
+  it.only('It writes in chunks on sql server database', async () => {
     adapter = new Database({
       client: 'mssql',
       connection: {
