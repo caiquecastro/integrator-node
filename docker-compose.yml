@@ -9,19 +9,20 @@ services:
     ports:
       - 1433:1433
   mysql:
-    image: mysql
-    command: --default-authentication-plugin=mysql_native_password
+    image: bitnami/mysql:8.0.33
     environment:
-      - MYSQL_RANDOM_ROOT_PASSWORD=yes
-      - MYSQL_USER=integrator
-      - MYSQL_PASSWORD=integrator!23
-      - MYSQL_DATABASE=Integrator
+      MYSQL_ROOT_PASSWORD: integrator!23
+      MYSQL_USER: integrator
+      MYSQL_PASSWORD: integrator
+      MYSQL_DATABASE: integrator
+      MYSQL_AUTHENTICATION_PLUGIN: mysql_native_password
     ports:
       - 3306:3306
   pg:
-    image: postgres
+    image: postgres:15.2
     environment:
-      - POSTGRES_USER=integrator
-      - POSTGRES_DB=Integrator
+      POSTGRES_USER: integrator
+      POSTGRES_DB: integrator
+      POSTGRES_PASSWORD: integrator!23
     ports:
       - 5432:5432

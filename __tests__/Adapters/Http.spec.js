@@ -57,27 +57,17 @@ test('It writes the records', async (t) => {
     url: 'https://jsonplaceholder.typicode.com/users',
   });
 
-  let requestCount = 0;
-
-  server.use(
-    rest.post('https://jsonplaceholder.typicode.com/users', (req, res, ctx) => {
-      requestCount += 1;
-      return res(
-        ctx.json([{
-          id: 1,
-          name: 'John Doe',
-          email: 'johndoe@example.com',
-        }]),
-      );
-    }),
-  );
-
-  await adapter.write([
+  const result = await adapter.write([
     {
       name: 'John',
       email: 'johndoe@example.com',
     },
   ]);
 
-  t.is(requestCount, 1);
+  t.deepEqual(result, [
+    {
+      name: 'John',
+      email: 'johndoe@example.com',
+    },
+  ]);
 });

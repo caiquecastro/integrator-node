@@ -17,9 +17,11 @@ export default class Http {
   }
 
   write(rows) {
-    return Promise.all(rows.map((row) => fetch(this.config.url, {
+    const requests = rows.map((row) => fetch(this.config.url, {
       method: 'POST',
       body: JSON.stringify(row),
-    })));
+    }).then((res) => res.json()));
+
+    return Promise.all(requests);
   }
 }
