@@ -14,7 +14,14 @@ A integration tool between systems, platforms and protocols
 
 ## Contribution
 
-WIP
+- Ensure all tests pass
+- Ensure all code is formatted correctly
+- Ensure all code is documented correctly
+- Ensure all code is tested correctly
+- Ensure all code is performance optimized
+- Ensure all code is security optimized
+- Ensure all code is maintainable\
+- Open a PR
 
 ## Roadmap
 
